@@ -1,0 +1,49 @@
+### Alapértelmezett URL változó definiálása
+@baseUrl = http://localhost:3000/api/diakok
+
+### 1. Összes diák lekérése (GET)
+GET {{baseUrl}}
+
+### 2. Új diák felvétele (POST)
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "nev": "Balogh Péter",
+  "szak": "Szoftverfejlesztő"
+}
+
+### 3. Hibateszt: Új diák felvétele hiányzó adatokkal (POST -> 400 Bad Request)
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "nev": "Hiányos Elek"
+}
+
+### 4. Létező diák frissítése ID alapján (PUT -> 200 OK)
+PUT {{baseUrl}}/1
+Content-Type: application/json
+
+{
+  "nev": "Kovács Péter Pál",
+  "szak": "Senior Szoftverfejlesztő"
+}
+
+### 5. Hibateszt: Nem létező diák frissítése (PUT -> 404 Not Found)
+PUT {{baseUrl}}/9999
+Content-Type: application/json
+
+{
+  "nev": "Fantom István",
+  "szak": "Grafikus"
+}
+
+### 6. Diák törlése ID alapján (DELETE -> 204 No Content)
+DELETE {{baseUrl}}/2
+
+### 7. Hibateszt: Nem létező diák törlése (DELETE -> 404 Not Found)
+DELETE {{baseUrl}}/9999
+
+### 8. Végső ellenőrzés (GET)
+GET {{baseUrl}}
